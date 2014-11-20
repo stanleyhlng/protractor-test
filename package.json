@@ -1,0 +1,10 @@
+{
+    "name": "protractor-test",
+    "version": "0.0.1",
+    "devDependencies": {
+        "protractor": "*",
+        "mocha": "*",
+        "chai": "*",
+        "chai-as-promised": "*"
+    }
+}
