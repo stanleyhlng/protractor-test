@@ -17,8 +17,9 @@ describe('standalone universal header page', function() {
 
             // Get tags using either by.css('script['src]') or by.tagName('script')
             browser.driver.findElements(by.css('script[src]')).then(function (items) {
-                console.log(url);
-                console.log(items.length);
+            //browser.driver.findElements(by.tagName('script')).then(function (items) {
+                console.log('current_url: ' + url);
+                console.log('number_of_items: ' + items.length);
 
                 var count = 1;
                 items.forEach(function (item) {
@@ -29,14 +30,33 @@ describe('standalone universal header page', function() {
                         expect(text).to.not.equal(url);
                     });
                 });
-                
+
             });
 
         });
     });
 
-    // it('should have non-empty href in the <link> tags', function() {
-    //     expect(true).to.be.true;
-    // });
+    it('should have non-empty href in the <link> tags', function() {
+        browser.driver.getCurrentUrl().then(function (url) {
+
+            // Get tags using by.css('link['href]')
+            browser.driver.findElements(by.css('link[href]')).then(function (items) {
+                console.log('current_url: ' + url);
+                console.log('number_of_items: ' + items.length);
+
+                var count = 1;
+                items.forEach(function (item) {
+                    item.getAttribute('href').then(function (text) {
+                        console.log('====> ' + count + '. ' + text);
+                        count++;
+
+                        expect(text).to.not.equal(url);
+                    });
+                });
+
+            });
+
+        });
+    });
 
 });
