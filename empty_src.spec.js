@@ -9,7 +9,8 @@ chai.use(chaiAsPromised);
 describe('standalone universal header page', function() {
 
     beforeEach(function() {
-        browser.driver.get('http://phpfe1.int.netsvs.corp.gq1.yahoo.com/tests/ucs_client/?abc=def');
+        //browser.driver.get('http://phpfe1.int.netsvs.corp.gq1.yahoo.com/tests/ucs_client/?abc=def');
+        browser.driver.get('https://news.yahoo.com');
     });
 
     it('should have non-empty src in the <script> tags', function() {
@@ -46,11 +47,19 @@ describe('standalone universal header page', function() {
 
                 var count = 1;
                 items.forEach(function (item) {
-                    item.getAttribute('href').then(function (text) {
-                        console.log('====> ' + count + '. ' + text);
-                        count++;
+                    item.getAttribute('rel').then(function (text) {
+                        if (text != 'canonical') {
+                            item.getAttribute('href').then(function (text) {
+                                console.log('====> ' + count + '. ' + text);
+                                count++;
 
-                        expect(text).to.not.equal(url);
+                                expect(text).to.not.equal(url);
+                            });
+                        }
+                        else {
+                            console.log('====> ' + count + '. ' + '[skip][rel=canonical] ' + text);
+                            count++;
+                        }
                     });
                 });
 
