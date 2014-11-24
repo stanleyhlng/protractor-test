@@ -12,7 +12,7 @@ exports.config = {
     //       browserName: 'firefox'
     //   },
     {
-        browserName: 'chrome'
+        browserName: 'firefox'
     },
     // {
     //     'browserName': 'phantomjs',
